@@ -60,6 +60,61 @@
     .f-right {
       float: right;
     }
+
+    @property --p{
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+.pie {
+  --p:20;
+  --b:22px;
+  --c:darkred;
+  --w:150px;
+  
+  width:var(--w);
+  aspect-ratio:1;
+  position:relative;
+  display:inline-grid;
+  margin:5px;
+  place-content:center;
+  font-size:25px;
+  font-weight:bold;
+  font-family:sans-serif;
+}
+.pie:before,
+.pie:after {
+  content:"";
+  position:absolute;
+  border-radius:50%;
+}
+.pie:before {
+  inset:0;
+  background:
+    radial-gradient(farthest-side,var(--c) 98%,#0000) top/var(--b) var(--b) no-repeat,
+    conic-gradient(var(--c) calc(var(--p)*1%),#0000 0);
+  -webkit-mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+          mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+}
+.pie:after {
+  inset:calc(50% - var(--b)/2);
+  background:var(--c);
+  transform:rotate(calc(var(--p)*3.6deg)) translateY(calc(50% - var(--w)/2));
+}
+.animate {
+  animation:p 1s .5s both;
+}
+.no-round:before {
+  background-size:0 0,auto;
+}
+.no-round:after {
+  content:none;
+}
+@keyframes p {
+  from{--p:0}
+}
+
   </style>
 </head>
 
@@ -70,9 +125,9 @@
       <div class="col-md-4 col-xl-3">
         <div class="card bg-c-blue order-card">
           <div class="card-block">
-            <h6 class="m-b-20">Total Teacher</h6>
-            <h2 class="text-right"><i class="fas fa-chalkboard-teacher f-left"></i><span>{{teachercount}}</span></h2>
-            <p class="m-b-0">Pending Teacher<span class="f-right">{{pendingteachercount}}</span></p>
+            <h6 class="m-b-20">Total Institutions <i class="fas fa-chalkboard-teacher f-right"></i></h6>
+            <div class="pie animate no-round" style="--p:80;--c:orange;"> {{teachercount}}</div>
+            <p class="m-b-0">Pending Institutions<span class="f-right">{{pendingteachercount}}</span></p>
           </div>
         </div>
       </div>
@@ -80,7 +135,7 @@
       <div class="col-md-4 col-xl-3">
         <div class="card bg-c-green order-card">
           <div class="card-block">
-            <h6 class="m-b-20">Total Student</h6>
+            <h6 class="m-b-20">Total Students</h6>
             <h2 class="text-right"><i class="fas fa-user-graduate f-left"></i><span>{{studentcount}}</span></h2>
             <p class="m-b-0">Pending Students<span class="f-right">{{pendingstudentcount}}</span></p>
           </div>
@@ -88,19 +143,9 @@
       </div>
 
       <div class="col-md-4 col-xl-3">
-        <div class="card bg-c-yellow order-card">
-          <div class="card-block">
-            <h6 class="m-b-20">Teachers Salary</h6>
-            <h2 class="text-right"><i class="fas fa-search-dollar f-left"></i><span>{{teachersalary}}</span></h2>
-            <p class="m-b-0">Pending Salary<span class="f-right">{{pendingteachersalary}}</span></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4 col-xl-3">
         <div class="card bg-c-pink order-card">
           <div class="card-block">
-            <h6 class="m-b-20">Student Fee</h6>
+            <h6 class="m-b-20">Total Donations</h6>
             <h2 class="text-right"><i class="fas fa-search-dollar f-left"></i><span>{{studentfee}}</span></h2>
             <p class="m-b-0">Pending Dues<span class="f-right">{{pendingstudentfee}}</span></p>
           </div>
@@ -109,11 +154,6 @@
     </div>
   </div>
 
-
-  <!--
-written By : sumit kumar
-facebook : fb.com/sumit.luv
--->
 
   <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
   <script type="text/javascript">

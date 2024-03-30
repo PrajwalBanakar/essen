@@ -6,6 +6,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.conf import settings
 from django.core.mail import send_mail
+# from .models import VolunteerRegistration
+# from .forms import VolunteerRegistrationForm
 
 def home_view(request):
     if request.user.is_authenticated:
@@ -14,21 +16,21 @@ def home_view(request):
 
 
 
-#for showing signup/login button for teacher(by sumit)
+#for showing signup/login button for teacher
 def adminclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
     return render(request,'school/adminclick.html')
 
 
-#for showing signup/login button for teacher(by sumit)
+#for showing signup/login button for teacher
 def teacherclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
     return render(request,'school/teacherclick.html')
 
 
-#for showing signup/login button for student(by sumit)
+#for showing signup/login button for student
 def studentclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
@@ -105,7 +107,7 @@ def teacher_signup_view(request):
 
 
 
-#for checking user is techer , student or admin(by sumit)
+#for checking user is techer , student or admin
 def is_admin(user):
     return user.groups.filter(name='ADMIN').exists()
 def is_teacher(user):
@@ -133,7 +135,7 @@ def afterlogin_view(request):
 
 
 
-#for dashboard of adminnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn(by sumit)
+#for dashboard of admin
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -152,7 +154,7 @@ def admin_dashboard_view(request):
 
     notice=models.Notice.objects.all()
 
-    #aggregate function return dictionary so fetch data from dictionay(by sumit)
+    #aggregate function return dictionary so fetch data from dictionay
     mydict={
         'teachercount':teachercount,
         'pendingteachercount':pendingteachercount,
@@ -178,7 +180,7 @@ def admin_dashboard_view(request):
 
 
 
-#for teacher sectionnnnnnnn by adminnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn(by sumit)
+#for teacher section by admin
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -290,7 +292,7 @@ def admin_view_teacher_salary_view(request):
 
 
 
-#for student by adminnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn(by sumit)
+#for student by admin
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -404,7 +406,7 @@ def admin_view_student_fee_view(request):
 
 
 
-#attendance related viewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww(by sumit)
+#attendance related view
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_attendance_view(request):
@@ -460,7 +462,7 @@ def admin_view_attendance_view(request,cl):
 
 
 
-#fee related view by adminnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn(by sumit)
+#fee related view by admin
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_fee_view(request):
@@ -480,7 +482,7 @@ def admin_view_fee_view(request,cl):
 
 
 
-#notice related viewsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss(by sumit)
+#notice related views
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_notice_view(request):
@@ -501,7 +503,7 @@ def admin_notice_view(request):
 
 
 
-#for TEACHER  LOGIN    SECTIONNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN(by sumit)
+#for TEACHER  LOGIN    SECTION
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_dashboard_view(request):
@@ -586,7 +588,7 @@ def teacher_notice_view(request):
 
 
 
-#FOR STUDENT AFTER THEIR Loginnnnnnnnnnnnnnnnnnnnn(by sumit)
+#FOR STUDENT AFTER THEIR Login
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_dashboard_view(request):
@@ -626,7 +628,7 @@ def student_attendance_view(request):
 
 
 
-# for aboutus and contact ussssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss (by sumit)
+# for aboutus and contact us
 def aboutus_view(request):
     return render(request,'school/aboutus.html')
 
@@ -641,3 +643,17 @@ def contactus_view(request):
             send_mail(str(name)+' || '+str(email),message,settings.EMAIL_HOST_USER, settings.EMAIL_RECEIVING_USER, fail_silently = False)
             return render(request, 'school/contactussuccess.html')
     return render(request, 'school/contactus.html', {'form':sub})
+
+
+# def register_for_opportunity(request):
+#     if request.method == 'POST':
+#         form = VolunteerRegistrationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('registration_success')  # Redirect to a success page
+#     else:
+#         form = VolunteerRegistrationForm()
+#     return render(request, 'registration_form.html', {'form': form})
+
+# def registration_success(request):
+#     return render(request, 'school/registration_success.html')

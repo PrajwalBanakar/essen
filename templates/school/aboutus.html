@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 {% load static %}
 <html lang="en" dir="ltr">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>LazyCoder || sumit</title>
+  <title>Essen</title>
   <style media="screen">
     .jumbotron {
       margin-top: 0px;
@@ -33,8 +33,7 @@
   </center>
   <div class="jumbotron" style="margin-bottom: 0px;margin-top: 0px;">
     <h1 class="display-4">Hello</h1>
-    <p class="lead" color="red">A service dedicated to Admin, Student and Teacher. We provide online resources, professional support
-      and guidance to all our students,teacher whenever, and from wherever they have chosen to study.</p>
+    <p class="lead" color="red">Connecting students, food banks, and teachers, our platform simplifies volunteer coordination. Empowering students to give back, aiding food banks in their mission, and facilitating service-learning for educators. Join us in building stronger communities, one volunteer at a time. Together, we can make a difference.</p>
     <hr class="my-4">
     <p>Explore our Website.</p>
     <p class="lead">
@@ -45,4 +44,86 @@
   {% include "school/footer.html" %}
 </body>
 
+</html> -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+ 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Essen</title>
+  <style media="screen">
+    .jumbotron {
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+ 
+    .jumbotron h1 {
+      text-align: center;
+    }
+ 
+    .alert {
+      margin: 0px;
+    }
+ 
+    .reduced-image {
+      width: 25%; /* Adjust as needed */
+      height: auto;
+      display: block;
+      margin: 0 auto; /* Center the image */
+    }
+ 
+    h1{
+      color: #484848;
+      font-size: 50px;
+      font-weight: bold;
+      font-family: monospace;
+      letter-spacing: 7px;
+      cursor: pointer
+    }
+    h1 span{
+      transition: .5s linear
+    }
+    h1:hover span:nth-child(1){
+      margin-right: 5px
+    }
+    h1:hover span:nth-child(1):after{
+      content: "'";
+    }
+    h1:hover span:nth-child(2){
+      margin-left: 30px
+    }
+    h1:hover span{
+      color: #238723;
+      text-shadow: 0 0 10px #fff;
+    }
+    
+  </style>
+ 
+  <title></title>
+</head>
+ 
+<body>
+ 
+  {% include "school/navbar.html" %}
+  <br><br>
+  <center>
+    <h3 class='alert alert-success' style="margin-bottom:0px;">About Us !</h3>
+  </center>
+  <div class="jumbotron" style="margin-bottom: 0px;margin-top: 0px;">
+    {% comment %} <h1 class="display-4">Hello</h1> {% endcomment %}
+    <h1><span>WE</span>RE<span>POSSIBLE</span></h1>
+    <!-- <img src="{% static 'images/food1.gif' %}" alt="Volunteering Image" class='reduced-image'> -->
+    <p class="lead" color="red">We specialize in connecting high schoolers with rewarding opportunities at local food banks to help them meet their community service hours while developing their social responsibility. Through our platform, students gain valuable experience while making a tangible impact on hunger relief efforts in their neighborhoods. Our mission is to empower young volunteers to become agents of change, creating a brighter future for themselves and those they serve.</p>
+    <hr class="my-4">
+    <p>Explore our Website.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="/" role="button">HOME</a>
+    </p>
+  </div>
+ 
+  {% include "school/footer.html" %}
+</body>
+ 
 </html>

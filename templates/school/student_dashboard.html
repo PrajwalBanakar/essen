@@ -44,15 +44,17 @@
 
 <br><br>
 <div class="w3-panel w3-blue ">
-  <p>Notice Board</p>
+  <p>Volunteer Opportunities</p>
 </div><br>
 {%for n in notice%}
 <div class="alert">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   <strong>{{n.date}} || By : {{n.by}}</strong><br> {{n.message}}
+  <button> Click here to register for the event</button>
 </div>
 {%endfor%}
 
+</script>
 
 
 
