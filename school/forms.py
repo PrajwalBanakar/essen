@@ -21,32 +21,8 @@ class StudentExtraForm(forms.ModelForm):
 
 
 
-#for teacher related form
-class TeacherUserForm(forms.ModelForm):
-    class Meta:
-        model=User
-        fields=['first_name','last_name','username','password']
-class TeacherExtraForm(forms.ModelForm):
-    class Meta:
-        model=models.TeacherExtra
-        fields=['salary','mobile','status']
 
-
-
-
-#for Attendance related form
-presence_choices=(('Present','Present'),('Absent','Absent'))
-class AttendanceForm(forms.Form):
-    present_status=forms.ChoiceField( choices=presence_choices)
-    date=forms.DateField()
-
-class AskDateForm(forms.Form):
-    date=forms.DateField()
-
-
-
-
-#for notice related form
+#for volunteer notice related form
 class NoticeForm(forms.ModelForm):
     class Meta:
         model=models.Notice
