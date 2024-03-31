@@ -80,4 +80,6 @@ urlpatterns = [
 
     path('aboutus', views.aboutus_view),
     path('contactus', views.contactus_view),
+    
+    path('register_event/', views.register_event, name='register_event'),
 ]

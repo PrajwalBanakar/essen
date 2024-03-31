@@ -53,3 +53,11 @@ class Notice(models.Model):
     date=models.DateField(auto_now=True)
     by=models.CharField(max_length=20,null=True,default='school')
     message=models.CharField(max_length=500)
+
+class EventRegistration(models.Model):
+    notice_id = models.IntegerField()
+    student_name = models.CharField(max_length=100)
+    roll = models.CharField(max_length=10)
+
+    def __str__(self):
+        return f"{self.student_name} - {self.notice_id}"

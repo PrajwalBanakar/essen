@@ -1,11 +1,7 @@
 {% extends 'school/studentbase.html' %}
 {% load static %}
 
-
-
-
 {% block content %}
-
 <head>
   <style media="screen">
     .alert {
@@ -36,26 +32,47 @@
     }
   </style>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
 </head>
+
 <br>
 
-{%include 'school/student_dashboard_cards.html'%}
+{% include 'school/student_dashboard_cards.html' %}
 
 <br><br>
 <div class="w3-panel w3-blue ">
   <p>Volunteer Opportunities</p>
 </div><br>
-{%for n in notice%}
-<div class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-  <strong>{{n.date}} || By : {{n.by}}</strong><br> {{n.message}}
-  <button> Click here to register for the event</button>
+{% for n in notice %}
+<div id="alert-{{ n.id }}" class="alert">
+  <span class="closebtn" onclick="closeAlert({{ n.id }})">&times;</span>
+  <strong>{{ n.date }} || By : {{ n.by }}</strong><br> {{ n.message }}
+  <form id="registration-form-{{ n.id }}" method="post" action="{% url 'register_event' %}">
+    {% csrf_token %}
+    <input type="hidden" name="notice_id" value="{{ n.id }}">
+    <input type="hidden" name="student_name" value="{{ user.first_name }} {{ user.last_name }}">
+    <input type="hidden" name="roll" value="{{ student.roll }}">
+    <button id="register-button-{{ n.id }}" type="button" onclick="registerEvent(this, {{ n.id }})">Click here to register for the event</button>
+  </form>
 </div>
-{%endfor%}
+{% endfor %}
 
+<script>
+  function closeAlert(alertId) {
+    var alertElement = document.getElementById('alert-' + alertId);
+    alertElement.style.display = 'none';
+  }
+
+  function registerEvent(button, noticeId) {
+    if (button.disabled) {
+      return; // Exit function if button is already disabled
+    }
+    
+    button.disabled = true;
+    button.innerHTML = 'Registered';
+
+    var form = document.getElementById('registration-form-' + noticeId);
+    form.submit();
+  }
 </script>
-
-
 
 {% endblock content %}

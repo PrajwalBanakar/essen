@@ -6,8 +6,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.conf import settings
 from django.core.mail import send_mail
-# from .models import VolunteerRegistration
-# from .forms import VolunteerRegistrationForm
+from .models import EventRegistration
 
 def home_view(request):
     if request.user.is_authenticated:
@@ -643,6 +642,24 @@ def contactus_view(request):
             send_mail(str(name)+' || '+str(email),message,settings.EMAIL_HOST_USER, settings.EMAIL_RECEIVING_USER, fail_silently = False)
             return render(request, 'school/contactussuccess.html')
     return render(request, 'school/contactus.html', {'form':sub})
+
+
+def register_event(request):
+    if request.method == 'POST':
+        notice_id = request.POST.get('notice_id')
+        student_name = request.POST.get('student_name')
+        roll = request.POST.get('roll')
+
+        # Create a new entry in the EventRegistration table
+        event_registration = EventRegistration.objects.create(
+            notice_id=notice_id,
+            student_name=student_name,
+            roll=roll
+        )
+
+        # Optionally, you can add some message or logic here
+
+    return redirect('student-dashboard')  # Redirect back to the student dashboard page
 
 
 # def register_for_opportunity(request):
